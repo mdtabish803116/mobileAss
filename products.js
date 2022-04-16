@@ -63,49 +63,136 @@ var data = [
       price: 149999,
     },
   ];
-    // console.log(data)
-  var tempData = [... data];
-//    console.log(tempData)
+
 
   localStorage.setItem("productList" , JSON.stringify(data));
 
   var productList = JSON.parse(localStorage.getItem("productList"));
+
+  var sortedData = JSON.parse(JSON.stringify(productList));
   
-    displayMobile(productList);
- // console.log(productList);
-   function displayMobile(productList){ 
- productList.forEach(function(product){
-       var mobileBox = document.createElement("div");
-          var imgDiv = document.createElement("div");
-              var img = document.createElement("img");
-               img.src = product.image_url;
-        imgDiv.append(img);
-        
-         var name = document.createElement("div");
-           name.textContent = product.name;
 
-        var ratingDiv = document.createElement("div");
-           var ratingText = document.createElement("div");
-              ratingText.textContent = "rating:";
-         var appendRating = document.createElement("div");
-            appendRating.textContent = product.rating;
-            ratingDiv.append(ratingText , appendRating);
-        
-            var priceDiv = document.createElement("div");
-              priceDiv.textContent = product.price;
 
-              var addBtn = document.createElement("button");
-                addBtn.textContent = "Add To cart"
-                addBtn.addEventListener("click" , function(){
-                      addToCart(product);
-                })
+var sortByPrice = document.querySelector("#sortByPrice");
+   sortByPrice.addEventListener("change" , displayData1);
 
-        mobileBox.append(imgDiv , name , ratingDiv , priceDiv , addBtn);
-    document.getElementById("mobileContainer").append(mobileBox);
+  // function displayData1(){
+  //     if(document.querySelector("#sortByPrice").value == "none"){
+  //         console.log(sortedData);
+  //         displayMobile(productList);
+  //     }else {  
+  //             sortedData.sort(function(a , b){
+  //               if(document.querySelector("#sortByPrice").value == "lowtohigh"){  
+  //                 return b.price - a.price;
+  //               }  
+
+  //               return a.price - b.price;
+  //             })
+  //              console.log(sortedData)
+  //             displayMobile(sortedData);
+  //   }
+  // }
+
+  function displayData1(){
+      if(sortByPrice.value == "none"){
+          console.log(sortedData);
+          displayMobile(productList);
+      }else {  
+        if(sortByPrice.value == "lowtohigh") {  
+        sortedData.sort(function(a , b){ 
+             return a.price - b.price;
+        })
+      }else {
+        sortedData.sort(function(a , b){ 
+          return b.price - a.price;
+     })
+      }
+      displayMobile(sortedData); 
+    }
+  }
+
+
+
+  var sortByRating = document.querySelector("#sortByRating");
+   sortByRating.addEventListener("change" , displayData2);
+
+//    function displayData2(){
+//     if(document.querySelector("#sortByRating").value == "none"){
+//         displayMobile(productList);
+//     }else {  
+//             sortedData.sort(function(a , b){
+//               if(document.querySelector("#sortByRating").value == "lowtohigh"){  
+//                 return parseInt(a.rating )- parseInt(b.rating);
+//               }
+
+//               return parseInt(b.rating) - parseInt(a.rating);
+              
+//             })
+
+//             displayMobile(sortedData);
+//   }
+// }
+
+
+function displayData2(){
+  if(sortByRating.value == "none"){
+      console.log(sortedData);
+      displayMobile(productList);
+  }else {  
+    if(sortByRating.value == "lowtohigh") {  
+    sortedData.sort(function(a , b){ 
+         return a.rating - b.rating;
+    })
+  }else{
+    sortedData.sort(function(a , b){ 
+      return b.rating - a.rating;
  })
+  }
+  displayMobile(sortedData); 
+}
+}
+   
+
+
+displayMobile(productList);
+console.log(productList);
+  function displayMobile(productList){ 
+    document.getElementById("mobileContainer").innerHTML = "";
+productList.forEach(function(product){
+      var mobileBox = document.createElement("div");
+         var imgDiv = document.createElement("div");
+             var img = document.createElement("img");
+              img.src = product.image_url;
+       imgDiv.append(img);
+       
+        var name = document.createElement("div");
+          name.textContent = product.name;
+
+       var ratingDiv = document.createElement("div");
+          var ratingText = document.createElement("div");
+             ratingText.textContent = "rating:";
+        var appendRating = document.createElement("div");
+           appendRating.textContent = product.rating;
+           ratingDiv.append(ratingText , appendRating);
+       
+           var priceDiv = document.createElement("div");
+             priceDiv.textContent = product.price;
+
+             var addBtn = document.createElement("button");
+               addBtn.textContent = "Add To cart"
+               addBtn.addEventListener("click" , function(){
+                     addToCart(product);
+               })
+
+       mobileBox.append(imgDiv , name , ratingDiv , priceDiv , addBtn);
+   document.getElementById("mobileContainer").append(mobileBox);
+})
 
 }
-    var cartList = JSON.parse(localStorage.getItem("cartList"));
+
+displayMobile(productList);
+
+var cartList = JSON.parse(localStorage.getItem("cartList"));
     if(cartList == null){
         localStorage.setItem("cartList" , JSON.stringify([]));
     }
@@ -117,52 +204,3 @@ var data = [
 
 
    }
-
-
-var sortByPrice = document.getElementById("sortByPrice");
-   sortByPrice.addEventListener("change" , displayData1());
-
-  function displayData1(){
-    document.getElementById("mobileContainer").innerText = "";
-      if(sortByPrice.value == "hightolow"){
-          tempData.sort(function( a, b){
-                return b.price - a.price;
-          })
-      }
-      else if(sortByPrice.value == "lowtohigh"){
-        tempData.sort(function( a, b){
-              return a.price - b.price;
-        })
-    }
-
-     localStorage.setItem("sort1productList" , JSON.stringify(tempData));
-    // var sort1ProductList = JSON.parse(localStorage.getItem("sort1productList"));
-
-     displayMobile(tempData);
-  }
-
-
-  var sortByRating = document.getElementById("sortByRating");
-   sortByRating.addEventListener("change" , displayData2());
-
-  function displayData2(){
-    document.getElementById("mobileContainer").innerText = "";
-      if(sortByPrice.value == "hightolow"){
-          tempData.sort(function( a, b){
-                return b.rating - a.rating;
-          })
-      }
-     else if(sortByPrice.value == "lowtohigh"){
-        tempData.sort(function( a, b){
-              return a.rating - b.rating;
-        })
-    }
-
-     localStorage.setItem("sort2productList" , JSON.stringify(tempData));
-     var sort2ProductList = JSON.parse(localStorage.getItem("sort2productList"));
-
-     displayMobile(sort2ProductList);
-  }
-
-//   console.log(data)
-//    console.log(tempData)
