@@ -1,0 +1,18 @@
+#cartContainer{
+    width : 80%;
+   display : grid;
+   grid-template-columns: repeat(3 , 1fr);
+   margin : auto;
+   gap : 20px;
+}
+
+#cartContainer > div{
+   border : 1px solid green;
+   font-size : 20px;
+   text-align : center;
+}
+
+#cartContainer > div >div:nth-child(3){
+    display : flex;
+    justify-content : center;
+}

@@ -1,0 +1,25 @@
+#sortSection {
+    display : flex;
+    margin-left : 50px;
+    margin-bottom : 50px;
+    margin-top : 50px;
+}
+
+#mobileContainer{
+     width : 80%;
+    display : grid;
+    grid-template-columns: repeat(3 , 1fr);
+    margin : auto;
+    gap : 20px;
+}
+
+#mobileContainer > div{
+    border : 1px solid red;
+    font-size : 20px;
+    text-align : center;
+}
+
+#mobileContainer > div >div:nth-child(3){
+     display : flex;
+     justify-content : center;
+}
