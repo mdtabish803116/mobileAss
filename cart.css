@@ -1,3 +1,13 @@
+
+#totalPriceDiv {
+      margin-top : 50px;
+      margin-bottom : 30px;
+}
+
+#discountBox{
+    margin : 100px;
+}
+
 #cartContainer{
     width : 80%;
    display : grid;
@@ -15,4 +25,36 @@
 #cartContainer > div >div:nth-child(3){
     display : flex;
     justify-content : center;
+}
+
+#discountBox{
+    margin : 50px;
+    font-size : 18px;
+    margin-left : 8%;
+}
+
+#discountBox > div{
+       display : flex;
+       margin-top: 3px;
+       border-radius: 5px;
+       font-size : 22px;
+
+}
+#discountBox > div:first-child{
+    color : green;
+}
+
+#discountBox > div >input{
+    border: 1px solid black;
+    outline : none;
+    padding : 8px 5px;
+    font-size : 18px
+
+}
+
+#discountBox > div >div{
+    background:green;
+      padding : 8px 5px;
+       color : white;
+      cursor : pointer;
 }

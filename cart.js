@@ -36,3 +36,39 @@ cartList.forEach(function(product){
 })
 
 }
+
+  var total = 0;
+    cartList.forEach(function(item){
+      total = total + item.price;
+    })
+
+   //  localStorage.setItem("totalPrice" , total);
+   //  var totalPrice1 = localStorage.getItem("totalPrice");
+
+    var totalPrice = document.createElement("div");
+      totalPrice.setAttribute("id", "appendOrderTotal")
+      totalPrice.textContent = `Total  Price =  RS. ${total}.00`;
+      document.getElementById("totalPriceDiv").append(totalPrice);
+
+      var flagCpn = true;
+document.getElementById("applyBtn").addEventListener("click", function(){
+    var inputCpnVal = document.querySelector("#inputCpn").value;
+    var appendOrderTotal = document.getElementById("appendOrderTotal")
+       if(flagCpn){  
+    if(inputCpnVal == "masai30"){
+        total = parseInt(total - total*(0.3));
+
+       // console.log(total);
+        alert("Coupon applied succesfully");
+
+        flagCpn = false;
+    }else {
+        alert("Coupon is not Valid !")
+    }
+
+    appendOrderTotal.textContent = `Total Price =  Rs. ${total}.00`;
+
+  }else{
+      alert("You have already applied the coupon !");
+  }
+});
